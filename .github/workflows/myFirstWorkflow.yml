@@ -42,10 +42,11 @@ jobs:
         with:
           name: multiple_paths_with_exclusions
           path: |
-            ./artifact.txt
+            ./myartifact.txt
             artifacts/
             !**/hostname.txt
   job2:
+    needs: job1
     name: JOB2
     runs-on: ubuntu-latest
     steps:
