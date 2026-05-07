@@ -60,7 +60,7 @@ jobs:
       - name: checking current directory pst download
         run: |
           pwd
-          ls-ltr
+          ls -ltr
         
         
   
