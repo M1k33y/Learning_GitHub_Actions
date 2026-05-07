@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Step-1
-        run:
+        run: |
           pwd
           ls -ltr
           hostname
@@ -34,14 +34,14 @@ jobs:
         uses: actions/upload-artifact@v5.0.0
         with:
           name: multiple_paths
-          paths: |
-            ./artifact.txt
+          path: |
+            ./myartifact.txt
             artifacts/
       - name: Upload multiple paths with exclusions
         uses: actions/upload-artifact@v5.0.0
         with:
           name: multiple_paths_with_exclusions
-          paths: |
+          path: |
             ./artifact.txt
             artifacts/
             !**/hostname.txt
