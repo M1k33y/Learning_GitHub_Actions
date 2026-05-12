@@ -2,6 +2,11 @@ name: myFirstWorkflow
 #to get trigger on every push in this repo
 on: 
   push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
   job1:
     name: JOB1
@@ -25,43 +30,7 @@ jobs:
         with:
           name: single_file
           path: ./myartifact.txt
-      - name: Upload from directory
-        uses: actions/upload-artifact@v5.0.0
-        with:
-          name: directory_artifacts
-          path: artifacts/
-      - name: Upload from multiple paths
-        uses: actions/upload-artifact@v5.0.0
-        with:
-          name: multiple_paths
-          path: |
-            ./myartifact.txt
-            artifacts/
-      - name: Upload multiple paths with exclusions
-        uses: actions/upload-artifact@v5.0.0
-        with:
-          name: multiple_paths_with_exclusions
-          path: |
-            ./myartifact.txt
-            artifacts/
-            !**/hostname.txt
-  job3:
-    needs: job1
-    name: JOB3
-    runs-on: ubuntu-latest
-    steps:
-      - name: checking current directory
-        run: |
-          pwd
-          ls -ltr
-      - name: Download directory
-        uses: actions/download-artifact@v5.0.0
-        with:
-          name: directory_artifacts
-      - name: checking current directory pst download
-        run: |
-          pwd
-          ls -ltr
+     
   job2:
     needs: job1
     name: JOB2
@@ -79,36 +48,6 @@ jobs:
         run: |
           pwd
           ls -ltr
-  job4:
-    needs: job1
-    name: JOB4
-    runs-on: ubuntu-latest
-    steps:
-      - name: Creating custom folder for download
-        run: |
-          mkdir -p single_file
-          mkdir -p download_directory
-      - name: checking current directory
-        run: |
-          pwd
-          ls -ltr
-      - name: Download single file artifact
-        uses: actions/download-artifact@v5.0.0
-        with:
-          name: single_file
-          path: single_file
-      - name: Download directory
-        uses: actions/download-artifact@v5.0.0
-        with:
-          name: directory_artifacts
-          path: download_directory
-      - name: checking current directory pst download
-        run: |
-          pwd
-          echo "CHECKING SINGLE FILE DIRECTORY"
-          ls -ltr single_file
-          echo "CHECKING DIRECTORY ARTIFACTS"
-          ls -ltr download_directory
-        
-        
-  
+      - name: Step for PR demo
+        run: exit 0
+
